@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["TestRequest","Test `Request` builder."]]});
