@@ -328,11 +328,6 @@
 <span id="327">327</span>
 <span id="328">328</span>
 <span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">cmp</span>,
     <span class="ident">error::Error</span> <span class="kw">as</span> <span class="ident">StdError</span>,
@@ -444,7 +439,7 @@
                 <span class="ident">Poll::Ready</span>(<span class="prelude-val">Some</span>((<span class="ident">req</span>, <span class="ident">tx</span>))) =&gt; {
                     <span class="kw">let</span> (<span class="ident">parts</span>, <span class="ident">body</span>) <span class="op">=</span> <span class="ident">req</span>.<span class="ident">into_parts</span>();
                     <span class="kw">let</span> <span class="ident">pl</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::h2::Payload::new</span>(<span class="ident">body</span>);
-                    <span class="kw">let</span> <span class="ident">pl</span> <span class="op">=</span> <span class="ident">Payload</span>::<span class="op">&lt;</span><span class="ident"><span class="kw">crate</span>::payload::PayloadStream</span><span class="op">&gt;</span><span class="ident">::H2</span>(<span class="ident">pl</span>);
+                    <span class="kw">let</span> <span class="ident">pl</span> <span class="op">=</span> <span class="ident">Payload::H2</span>(<span class="ident">pl</span>);
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">req</span> <span class="op">=</span> <span class="ident">Request::with_payload</span>(<span class="ident">pl</span>);
 
                     <span class="kw">let</span> <span class="ident">head</span> <span class="op">=</span> <span class="ident">req</span>.<span class="ident">head_mut</span>();
@@ -495,16 +490,11 @@
                                 <span class="ident">Poll::Ready</span>(<span class="kw">_</span>) =&gt; {
                                     <span class="ident">ping_pong</span>.<span class="ident">on_flight</span> <span class="op">=</span> <span class="bool-val">false</span>;
 
-                                    <span class="kw">let</span> <span class="ident">dead_line</span> <span class="op">=</span>
-                                        <span class="ident">this</span>.<span class="ident">config</span>.<span class="ident">keep_alive_expire</span>().<span class="ident">unwrap</span>();
+                                    <span class="kw">let</span> <span class="ident">dead_line</span> <span class="op">=</span> <span class="ident">this</span>.<span class="ident">config</span>.<span class="ident">keep_alive_expire</span>().<span class="ident">unwrap</span>();
                                     <span class="ident">ping_pong</span>.<span class="ident">timer</span>.<span class="ident">as_mut</span>().<span class="ident">reset</span>(<span class="ident">dead_line</span>);
                                 }
                                 <span class="ident">Poll::Pending</span> =&gt; {
-                                    <span class="kw">return</span> <span class="ident">ping_pong</span>
-                                        .<span class="ident">timer</span>
-                                        .<span class="ident">as_mut</span>()
-                                        .<span class="ident">poll</span>(<span class="ident">cx</span>)
-                                        .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(()))
+                                    <span class="kw">return</span> <span class="ident">ping_pong</span>.<span class="ident">timer</span>.<span class="ident">as_mut</span>().<span class="ident">poll</span>(<span class="ident">cx</span>).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(()))
                                 }
                             }
                         } <span class="kw">else</span> {
@@ -668,5 +658,5 @@
     <span class="ident">res</span>
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="actix_http" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (0fb1c371d 2021-12-06)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="actix_http" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (0b6f079e4 2021-12-07)" ></div>
 </body></html>
