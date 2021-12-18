@@ -421,7 +421,7 @@
             <span class="ident">Connector::new</span>()
                 .<span class="ident">conn_lifetime</span>(<span class="ident">Duration::from_secs</span>(<span class="number">0</span>))
                 .<span class="ident">timeout</span>(<span class="ident">Duration::from_millis</span>(<span class="number">30000</span>))
-                .<span class="ident">ssl</span>(<span class="ident">builder</span>.<span class="ident">build</span>())
+                .<span class="ident">openssl</span>(<span class="ident">builder</span>.<span class="ident">build</span>())
         };
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;openssl&quot;</span>))]</span>
@@ -625,5 +625,5 @@
     <span class="ident">tcp</span>.<span class="ident">local_addr</span>().<span class="ident">unwrap</span>()
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="actix_http_test" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (5531927e8 2021-12-16)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="actix_http_test" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (7abab1efb 2021-12-17)" ></div>
 </body></html>
