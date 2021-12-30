@@ -831,13 +831,6 @@
 <span id="829">829</span>
 <span id="830">830</span>
 <span id="831">831</span>
-<span id="832">832</span>
-<span id="833">833</span>
-<span id="834">834</span>
-<span id="835">835</span>
-<span id="836">836</span>
-<span id="837">837</span>
-<span id="838">838</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">cell::RefCell</span>, <span class="ident">fmt</span>, <span class="ident">future::Future</span>, <span class="ident">marker::PhantomData</span>, <span class="ident">rc::Rc</span>};
 
 <span class="kw">use</span> <span class="ident">actix_http</span>::{<span class="ident">body::BoxBody</span>, <span class="ident">Extensions</span>};
@@ -860,31 +853,28 @@
         <span class="ident">BoxedHttpService</span>, <span class="ident">BoxedHttpServiceFactory</span>, <span class="ident">HttpServiceFactory</span>, <span class="ident">ServiceRequest</span>,
         <span class="ident">ServiceResponse</span>,
     },
-    <span class="ident">BoxError</span>, <span class="ident">Error</span>, <span class="ident">FromRequest</span>, <span class="ident">HttpResponse</span>, <span class="ident">Responder</span>,
+    <span class="ident">Error</span>, <span class="ident">FromRequest</span>, <span class="ident">HttpResponse</span>, <span class="ident">Responder</span>,
 };
 
-<span class="doccomment">/// *Resource* is an entry in resources table which corresponds to requested URL.</span>
+<span class="doccomment">/// A collection of [`Route`]s that respond to the same path pattern.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Resource in turn has at least one route.</span>
-<span class="doccomment">/// Route consists of an handlers objects and list of guards</span>
-<span class="doccomment">/// (objects that implement `Guard` trait).</span>
-<span class="doccomment">/// Resources and routes uses builder-like pattern for configuration.</span>
-<span class="doccomment">/// During request handling, resource object iterate through all routes</span>
-<span class="doccomment">/// and check guards for specific route, if request matches all</span>
-<span class="doccomment">/// guards, route considered matched and route handler get called.</span>
+<span class="doccomment">/// Resource in turn has at least one route. Route consists of an handlers objects and list of</span>
+<span class="doccomment">/// guards (objects that implement `Guard` trait). Resources and routes uses builder-like pattern</span>
+<span class="doccomment">/// for configuration. During request handling, resource object iterate through all routes and check</span>
+<span class="doccomment">/// guards for specific route, if request matches all guards, route considered matched and route</span>
+<span class="doccomment">/// handler get called.</span>
 <span class="doccomment">///</span>
+<span class="doccomment">/// # Examples</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// use actix_web::{web, App, HttpResponse};</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let app = App::new().service(</span>
-<span class="doccomment">///         web::resource(&quot;/&quot;)</span>
-<span class="doccomment">///             .route(web::get().to(|| HttpResponse::Ok())));</span>
-<span class="doccomment">/// }</span>
+<span class="doccomment">/// let app = App::new().service(</span>
+<span class="doccomment">///     web::resource(&quot;/&quot;)</span>
+<span class="doccomment">///         .route(web::get().to(|| HttpResponse::Ok())));</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// If no matching route could be found, *405* response code get returned.</span>
-<span class="doccomment">/// Default behavior could be overridden with `default_resource()` method.</span>
+<span class="doccomment">/// If no matching route could be found, *405* response code get returned. Default behavior could be</span>
+<span class="doccomment">/// overridden with `default_resource()` method.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Resource</span><span class="op">&lt;</span><span class="ident">T</span> <span class="op">=</span> <span class="ident">ResourceEndpoint</span>, <span class="ident">B</span> <span class="op">=</span> <span class="ident">BoxBody</span><span class="op">&gt;</span> {
     <span class="ident">endpoint</span>: <span class="ident">T</span>,
     <span class="ident">rdef</span>: <span class="ident">Patterns</span>,
@@ -974,15 +964,13 @@
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// use actix_web::{web, guard, App, HttpResponse};</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let app = App::new().service(</span>
-    <span class="doccomment">///         web::resource(&quot;/&quot;).route(</span>
-    <span class="doccomment">///             web::route()</span>
-    <span class="doccomment">///                 .guard(guard::Any(guard::Get()).or(guard::Put()))</span>
-    <span class="doccomment">///                 .guard(guard::Header(&quot;Content-Type&quot;, &quot;text/plain&quot;))</span>
-    <span class="doccomment">///                 .to(|| HttpResponse::Ok()))</span>
-    <span class="doccomment">///     );</span>
-    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// let app = App::new().service(</span>
+    <span class="doccomment">///     web::resource(&quot;/&quot;).route(</span>
+    <span class="doccomment">///         web::route()</span>
+    <span class="doccomment">///             .guard(guard::Any(guard::Get()).or(guard::Put()))</span>
+    <span class="doccomment">///             .guard(guard::Header(&quot;Content-Type&quot;, &quot;text/plain&quot;))</span>
+    <span class="doccomment">///             .to(|| HttpResponse::Ok()))</span>
+    <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Multiple routes could be added to a resource. Resource object uses</span>
@@ -1040,6 +1028,7 @@
     <span class="doccomment">///         .route(web::get().to(handler))</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;manage&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">app_data</span><span class="op">&lt;</span><span class="ident">U</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="ident">U</span>) -&gt; <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">app_data</span>
             .<span class="ident">get_or_insert_with</span>(<span class="ident">Extensions::new</span>)
@@ -1075,14 +1064,11 @@
     <span class="doccomment">/// # fn index(req: HttpRequest) -&gt; HttpResponse { unimplemented!() }</span>
     <span class="doccomment">/// App::new().service(web::resource(&quot;/&quot;).route(web::route().to(index)));</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">I</span>, <span class="ident">R</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">handler</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">Args</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">handler</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">Handler</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">R</span><span class="op">&gt;</span>,
-        <span class="ident">I</span>: <span class="ident">FromRequest</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">R</span>: <span class="ident">Future</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">R::Output</span>: <span class="ident">Responder</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="op">&lt;</span><span class="ident">R::Output</span> <span class="kw">as</span> <span class="ident">Responder</span><span class="op">&gt;</span><span class="ident">::Body</span>: <span class="ident">MessageBody</span>,
-        <span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">R::Output</span> <span class="kw">as</span> <span class="ident">Responder</span><span class="op">&gt;</span><span class="ident">::Body</span> <span class="kw">as</span> <span class="ident">MessageBody</span><span class="op">&gt;</span><span class="ident">::Error</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BoxError</span><span class="op">&gt;</span>,
+        <span class="ident">F</span>: <span class="ident">Handler</span><span class="op">&lt;</span><span class="ident">Args</span><span class="op">&gt;</span>,
+        <span class="ident">Args</span>: <span class="ident">FromRequest</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        <span class="ident">F::Output</span>: <span class="ident">Responder</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     {
         <span class="self">self</span>.<span class="ident">routes</span>.<span class="ident">push</span>(<span class="ident">Route::new</span>().<span class="ident">to</span>(<span class="ident">handler</span>));
         <span class="self">self</span>
@@ -1677,5 +1663,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="actix_web" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="actix_web" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (78fd0f633 2021-12-29)" ></div>
 </body></html>

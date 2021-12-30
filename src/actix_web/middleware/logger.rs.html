@@ -1390,7 +1390,7 @@
                 <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> <span class="ident">FormatText::Str</span>(<span class="ident">s</span>.<span class="ident">to_string</span>());
             }
             <span class="ident">FormatText::RemoteAddr</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">peer</span>) <span class="op">=</span> <span class="ident">req</span>.<span class="ident">connection_info</span>().<span class="ident">remote_addr</span>() {
+                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">peer</span>) <span class="op">=</span> <span class="ident">req</span>.<span class="ident">connection_info</span>().<span class="ident">peer_addr</span>() {
                     <span class="ident">FormatText::Str</span>((<span class="kw-2">*</span><span class="ident">peer</span>).<span class="ident">to_string</span>())
                 } <span class="kw">else</span> {
                     <span class="ident">FormatText::Str</span>(<span class="string">&quot;-&quot;</span>.<span class="ident">to_string</span>())
@@ -1683,5 +1683,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="actix_web" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="actix_web" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (78fd0f633 2021-12-29)" ></div>
 </body></html>

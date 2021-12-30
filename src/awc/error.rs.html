@@ -81,8 +81,10 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
+<span id="82">82</span>
 </pre><pre class="rust"><code><span class="doccomment">//! HTTP client errors</span>
 
+<span class="comment">// TODO: figure out how best to expose http::Error vs actix_http::Error</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">actix_http</span>::{
     <span class="ident">error</span>::{<span class="ident">HttpError</span>, <span class="ident">PayloadError</span>},
     <span class="ident">header::HeaderValue</span>,
@@ -163,5 +165,5 @@
 
 <span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">JsonPayloadError</span> {}
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="awc" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (34926f0a1 2021-12-22)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="awc" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.59.0-nightly (78fd0f633 2021-12-29)" ></div>
 </body></html>
