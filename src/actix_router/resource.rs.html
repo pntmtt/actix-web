@@ -2712,7 +2712,7 @@
                 }
 
                 <span class="kw">let</span> <span class="ident">pattern_re_set</span> <span class="op">=</span> <span class="ident">RegexSet::new</span>(<span class="ident">re_set</span>).<span class="ident">unwrap</span>();
-                <span class="kw">let</span> <span class="ident">segments</span> <span class="op">=</span> <span class="ident">segments</span>.<span class="ident">unwrap_or_else</span>(<span class="ident">Vec::new</span>);
+                <span class="kw">let</span> <span class="ident">segments</span> <span class="op">=</span> <span class="ident">segments</span>.<span class="ident">unwrap_or_default</span>();
 
                 (
                     <span class="ident">PatternType::DynamicSet</span>(<span class="ident">pattern_re_set</span>, <span class="ident">pattern_data</span>),
@@ -3620,5 +3620,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="actix_router" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (f624427f8 2022-02-06)" ></div>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="actix_router" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (e7aca8959 2022-02-09)" ></div>
 </body></html>
