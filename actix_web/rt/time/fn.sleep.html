@@ -11,7 +11,9 @@
 analog to <code>std::thread::sleep</code>.</p>
 <p>No work is performed while awaiting on the sleep future to complete. <code>Sleep</code>
 operates at millisecond granularity and should not be used for tasks that
-require high-resolution timers.</p>
+require high-resolution timers. The implementation is platform specific,
+and some platforms (specifically Windows) will provide timers with a
+larger resolution than 1 ms.</p>
 <p>To run something regularly on a schedule, see <a href="fn.interval.html"><code>interval</code></a>.</p>
 <p>The maximum duration for a sleep is 68719476734 milliseconds (approximately 2.2 years).</p>
 <h2 id="cancellation"><a href="#cancellation">Cancellation</a></h2>
@@ -39,5 +41,5 @@ Whereas <code>rt.block_on(async {sleep(...).await})</code> doesn’t panic.
 And this is because wrapping the function on an async makes it lazy,
 and so gets executed inside the runtime successfully without
 panicking.</p>
-</div></details></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="actix_web" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (76d770ac2 2022-04-02)" ></div>
+</div></details></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="actix_web" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.62.0-nightly (70b3681bf 2022-05-14)" ></div>
 </body></html>
